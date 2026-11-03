@@ -6,7 +6,7 @@ Functional Proof-of-Concept (PoC) prototype for the academic research paper:
 
 ---
 
-## 🏥 Architecture Overview
+## Architecture Overview
 
 The system addresses the critical problem of emergency patient transfers in resource-constrained, geographically challenging, and hazard-prone regions of Mindanao. In rural health units (RHUs), selecting a tertiary receiving hospital traditionally relies only on bed availability or static distance, frequently leading to ambulances being delayed by river flash floods, landslides on mountain bypasses, or severe hospital ICU deficits.
 
@@ -21,7 +21,7 @@ $$\text{RSS} = \max\left(5, \min\left(100, 100 - (P_{transit} + P_{capacity} + P
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ihrs-mindanao/
@@ -63,7 +63,7 @@ ihrs-mindanao/
 
 ---
 
-## 🚀 Quickstart & Execution
+## Quickstart & Execution
 
 ### 1. Backend Setup (FastAPI)
 ```bash
@@ -96,7 +96,7 @@ npm run dev
 
 ---
 
-## 🧪 Simulation Capabilities
+## Simulation Capabilities
 
 1. **Dynamic Rerouting / Hazard Toggle**:
    - In the top Alert Banner, click **"Inspect Hazards & Outbreaks"**.

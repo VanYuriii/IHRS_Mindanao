@@ -1,0 +1,50 @@
+[
+  {
+    "id": "rhu-toril",
+    "name": "Toril District Health Center",
+    "tier": "Primary",
+    "total_beds": 25,
+    "available_beds": 6,
+    "icu_available": 0,
+    "coordinates": {
+      "lat": 7.0167,
+      "lng": 125.4989
+    }
+  },
+  {
+    "id": "hosp-spmc",
+    "name": "Southern Philippines Medical Center [SPMC]",
+    "tier": "Tertiary",
+    "total_beds": 1500,
+    "available_beds": 110,
+    "icu_available": 4,
+    "coordinates": {
+      "lat": 7.0984,
+      "lng": 125.6268
+    }
+  },
+  {
+    "id": "hosp-ddh",
+    "name": "Davao Doctors Hospital",
+    "tier": "Tertiary",
+    "total_beds": 250,
+    "available_beds": 32,
+    "icu_available": 6,
+    "coordinates": {
+      "lat": 7.0682,
+      "lng": 125.6033
+    }
+  },
+  {
+    "id": "hosp-mdmrc",
+    "name": "Metro Davao Medical & Research Center",
+    "tier": "Tertiary",
+    "total_beds": 200,
+    "available_beds": 16,
+    "icu_available": 0,
+    "coordinates": {
+      "lat": 7.1086,
+      "lng": 125.6412
+    }
+  }
+]

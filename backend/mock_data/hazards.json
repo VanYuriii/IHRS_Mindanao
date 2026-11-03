@@ -1,0 +1,13 @@
+[
+  {
+    "id": "haz-macarthur-flood",
+    "type": "Severe Flooding",
+    "corridor_name": "MacArthur Highway / Matina Crossing",
+    "severity": "CRITICAL",
+    "coordinates": {
+      "lat": 7.0583,
+      "lng": 125.5862
+    },
+    "delay_penalty_minutes": 25
+  }
+]

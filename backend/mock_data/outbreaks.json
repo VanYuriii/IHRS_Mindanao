@@ -1,0 +1,13 @@
+[
+  {
+    "id": "outbreak-bucana-dengue",
+    "disease_type": "Dengue Hemorrhagic Fever",
+    "location_name": "Bucana Sector",
+    "threat_level": "HIGH",
+    "coordinates": {
+      "lat": 7.0610,
+      "lng": 125.6080
+    },
+    "risk_radius_km": 2.5
+  }
+]

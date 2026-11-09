@@ -41,10 +41,11 @@ dist-ssr/
 .env.local
 .env.*.local
 
-# IDEs & OS
+# IDEs, agents & OS
 .DS_Store
 .idea/
 .vscode/
+.agents/
 *.swp
 *.swo
 

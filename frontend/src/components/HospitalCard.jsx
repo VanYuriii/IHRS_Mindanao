@@ -10,6 +10,8 @@ import {
   ArrowRight,
   Award,
   Biohazard,
+  SlidersHorizontal,
+  Route,
 } from 'lucide-react';
 
 function getRssTheme(score) {
@@ -62,7 +64,21 @@ function getWarningBadgeStyle(warningText = '') {
   };
 }
 
-export default function HospitalCard({ recommendation, rank = 1, onDispatch }) {
+function formatSignedChip(val, isPositive = false) {
+  const num = Number(val) || 0;
+  if (isPositive) return `+${num.toFixed(1)}`;
+  if (num === 0) return '0.0';
+  return `${num > 0 ? '+' : ''}${num.toFixed(1)}`;
+}
+
+export default function HospitalCard({
+  recommendation,
+  rank = 1,
+  onDispatch,
+  onInspectScore,
+  isSelectedOnMap = false,
+  onSelectOnMap,
+}) {
   if (!recommendation || !recommendation.facility) return null;
 
   const {
@@ -72,6 +88,8 @@ export default function HospitalCard({ recommendation, rank = 1, onDispatch }) {
     route_safety_score,
     active_hazard_warnings = [],
     capacity_status,
+    recommended_corridor,
+    score_breakdown,
   } = recommendation;
 
   const rssScore = Math.round(Number(route_safety_score) || 0);
@@ -81,22 +99,33 @@ export default function HospitalCard({ recommendation, rank = 1, onDispatch }) {
   const totalBeds = facility.total_beds || 1;
   const availableBeds = facility.available_beds ?? 0;
   const icuAvailable = facility.icu_available ?? 0;
-  const availabilityRatio = Math.min(100, Math.max(0, Math.round((availableBeds / totalBeds) * 100)));
+  const availabilityRatio = Math.min(
+    100,
+    Math.max(0, Math.round((availableBeds / totalBeds) * 100))
+  );
 
   const hasWeatherDelay = active_hazard_warnings.some((w) => {
     const l = w.toLowerCase();
-    return l.includes('delay') || l.includes('flood') || l.includes('landslide') || l.includes('hazard');
+    return (
+      l.includes('delay') ||
+      l.includes('flood') ||
+      l.includes('landslide') ||
+      l.includes('hazard')
+    );
   });
 
   const isTopRank = rank === 1;
 
   return (
     <div
+      onClick={() => onSelectOnMap && onSelectOnMap(recommendation)}
       className={`bg-white rounded-xl shadow-sm transition-all overflow-hidden border ${
-        isTopRank
+        isSelectedOnMap
+          ? 'border-blue-500 ring-2 ring-blue-500/20'
+          : isTopRank
           ? 'border-blue-300 ring-1 ring-blue-500/20'
           : 'border-slate-200 hover:border-slate-300'
-      }`}
+      } ${onSelectOnMap ? 'cursor-pointer' : ''}`}
     >
       {/* Top Banner / Rank & Route Safety Score */}
       <div
@@ -138,13 +167,17 @@ export default function HospitalCard({ recommendation, rank = 1, onDispatch }) {
       <div className="p-5 space-y-4">
         {/* Facility Title & Distance / Transit Time */}
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-          <div>
-            <h3 className="text-base font-bold text-slate-900 leading-snug">{facility.name}</h3>
-            <div className="flex flex-wrap items-center gap-3 mt-1.5 text-xs text-slate-600">
+          <div className="space-y-1.5">
+            <h3 className="text-base font-bold text-slate-900 leading-snug">
+              {facility.name}
+            </h3>
+            <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600">
               <span className="inline-flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                <strong className="font-semibold text-slate-800">{transit_distance_km}</strong> km
-                transit distance
+                <strong className="font-semibold text-slate-800">
+                  {transit_distance_km}
+                </strong>{' '}
+                km transit distance
               </span>
               <span className="text-slate-300">•</span>
               <span className="inline-flex items-center gap-1">
@@ -160,6 +193,16 @@ export default function HospitalCard({ recommendation, rank = 1, onDispatch }) {
                 )}
               </span>
             </div>
+
+            {/* Recommended Corridor Badge */}
+            {recommended_corridor && (
+              <div className="pt-0.5">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                  <Route className="w-3 h-3 text-blue-600" />
+                  <span>Corridor: {recommended_corridor}</span>
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Mini RSS Gauge Bar */}
@@ -176,6 +219,57 @@ export default function HospitalCard({ recommendation, rank = 1, onDispatch }) {
             </div>
           </div>
         </div>
+
+        {/* Inline Preview of Score Breakdown Chips */}
+        {score_breakdown && (
+          <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+            <span className="text-[11px] font-semibold text-slate-400 mr-1">
+              RSS Weights:
+            </span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-slate-50 text-slate-700 border border-slate-200">
+              <span>Base:</span>
+              <strong className="text-slate-900">
+                {formatSignedChip(score_breakdown.base_distance_score, true)}
+              </strong>
+            </span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-slate-50 text-slate-700 border border-slate-200">
+              <span>Capacity:</span>
+              <strong
+                className={
+                  Number(score_breakdown.bed_capacity_penalty) < 0
+                    ? 'text-amber-700'
+                    : 'text-emerald-700'
+                }
+              >
+                {formatSignedChip(score_breakdown.bed_capacity_penalty)}
+              </strong>
+            </span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-slate-50 text-slate-700 border border-slate-200">
+              <span>Hazard:</span>
+              <strong
+                className={
+                  Number(score_breakdown.weather_hazard_penalty) < 0
+                    ? 'text-amber-700'
+                    : 'text-emerald-700'
+                }
+              >
+                {formatSignedChip(score_breakdown.weather_hazard_penalty)}
+              </strong>
+            </span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-slate-50 text-slate-700 border border-slate-200">
+              <span>ICU:</span>
+              <strong
+                className={
+                  Number(score_breakdown.icu_penalty) < 0
+                    ? 'text-rose-700'
+                    : 'text-emerald-700'
+                }
+              >
+                {formatSignedChip(score_breakdown.icu_penalty)}
+              </strong>
+            </span>
+          </div>
+        )}
 
         {/* Bed & ICU Capacity Section */}
         <div className="bg-slate-50/80 border border-slate-200/70 rounded-lg p-3.5 space-y-2.5">
@@ -252,10 +346,25 @@ export default function HospitalCard({ recommendation, rank = 1, onDispatch }) {
         )}
 
         {/* Action Footer */}
-        <div className="pt-2 border-t border-slate-100 flex items-center justify-end">
+        <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-end gap-2">
           <button
             type="button"
-            onClick={() => onDispatch && onDispatch(recommendation)}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onInspectScore) onInspectScore(recommendation);
+            }}
+            className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400"
+          >
+            <SlidersHorizontal className="w-3.5 h-3.5 text-slate-500" />
+            <span>Inspect Route Score</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onDispatch) onDispatch(recommendation);
+            }}
             className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold shadow-sm transition focus:outline-none focus:ring-2 focus:ring-offset-1 ${
               isTopRank
                 ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-600'

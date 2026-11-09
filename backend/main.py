@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import Any, Dict, List, Literal, Optional, Tuple, Union
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -25,7 +29,7 @@ app.include_router(facilities.router)
 
 
 @app.get("/", tags=["Health"])
-def root():
+def root() -> Dict[str, str]:
     """Root health check endpoint."""
     return {
         "status": "online",
@@ -37,6 +41,6 @@ def root():
 
 @app.get("/health", tags=["Health"])
 @app.get("/api/health", tags=["Health"])
-def health_check():
+def health_check() -> Dict[str, str]:
     """Service health check endpoint."""
     return {"status": "healthy"}

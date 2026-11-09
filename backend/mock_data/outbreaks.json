@@ -1,13 +1,24 @@
 [
   {
     "id": "outbreak-bucana-dengue",
-    "disease_type": "Dengue Hemorrhagic Fever",
-    "location_name": "Bucana Sector",
+    "disease_type": "High-Density Dengue Outbreak",
+    "location_name": "Barangay Bucana",
     "threat_level": "HIGH",
     "coordinates": {
       "lat": 7.0610,
       "lng": 125.6080
     },
-    "risk_radius_km": 2.5
+    "risk_radius_km": 2.0
+  },
+  {
+    "id": "outbreak-agdao-respiratory",
+    "disease_type": "Respiratory Infection Surveillance Cluster",
+    "location_name": "Agdao District",
+    "threat_level": "MODERATE",
+    "coordinates": {
+      "lat": 7.0860,
+      "lng": 125.6320
+    },
+    "risk_radius_km": 1.6
   }
 ]

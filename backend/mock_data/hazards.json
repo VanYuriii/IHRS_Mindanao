@@ -1,13 +1,28 @@
 [
   {
     "id": "haz-macarthur-flood",
-    "type": "Severe Flooding",
+    "type": "Severe Flash Flood",
     "corridor_name": "MacArthur Highway / Matina Crossing",
     "severity": "CRITICAL",
     "coordinates": {
       "lat": 7.0583,
       "lng": 125.5862
     },
-    "delay_penalty_minutes": 25
+    "delay_penalty_minutes": 30,
+    "radius_km": 2.0,
+    "description": "Severe flash flood at Matina Crossing (+30 min delay, severe detour required)"
+  },
+  {
+    "id": "haz-cpgarcia-landslide",
+    "type": "Landslide Risk Advisory",
+    "corridor_name": "CP Garcia Highway (Diversion Road, Buhangin Sector)",
+    "severity": "MODERATE",
+    "coordinates": {
+      "lat": 7.1320,
+      "lng": 125.6120
+    },
+    "delay_penalty_minutes": 18,
+    "radius_km": 1.8,
+    "description": "Slope instability and lane constriction along CP Garcia Diversion Road in Buhangin"
   }
 ]

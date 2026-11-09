@@ -1,4 +1,6 @@
-from typing import Any, Dict
+from __future__ import annotations
+
+from typing import Any, Dict, List, Literal, Optional, Tuple, Union
 
 from fastapi import APIRouter, status
 
@@ -10,18 +12,18 @@ router = APIRouter(prefix="/api", tags=["Facilities & Risks"])
 
 @router.get(
     "/facilities",
-    response_model=list[Facility],
+    response_model=List[Facility],
     status_code=status.HTTP_200_OK,
     summary="List all registered primary and tertiary facilities",
 )
-def get_facilities() -> list[Facility]:
+def get_facilities() -> List[Facility]:
     """Return all registered RHUs and tertiary hospitals in the Davao Region dataset."""
     return load_facilities()
 
 
 @router.get(
     "/risks",
-response_model=Dict[str, Any],
+    response_model=Dict[str, Any],
     status_code=status.HTTP_200_OK,
     summary="List active environmental hazards and disease clusters",
 )
@@ -31,4 +33,3 @@ def get_active_risks() -> Dict[str, Any]:
         "hazards": load_hazards(),
         "outbreaks": load_outbreaks(),
     }
-

@@ -9,42 +9,162 @@
     "coordinates": {
       "lat": 7.0167,
       "lng": 125.4989
-    }
+    },
+    "specialties": [
+      "General Medicine",
+      "Primary Triage",
+      "Maternal Care"
+    ],
+    "contact": "+63 (82) 291-1204"
+  },
+  {
+    "id": "rhu-bunawan",
+    "name": "Bunawan District Health Center",
+    "tier": "Primary",
+    "total_beds": 20,
+    "available_beds": 4,
+    "icu_available": 0,
+    "coordinates": {
+      "lat": 7.2341,
+      "lng": 125.6443
+    },
+    "specialties": [
+      "General Medicine",
+      "Primary Triage"
+    ],
+    "contact": "+63 (82) 236-0411"
+  },
+  {
+    "id": "rhu-calinan",
+    "name": "Calinan District Health Center",
+    "tier": "Primary",
+    "total_beds": 30,
+    "available_beds": 8,
+    "icu_available": 0,
+    "coordinates": {
+      "lat": 7.1856,
+      "lng": 125.4578
+    },
+    "specialties": [
+      "General Medicine",
+      "Pediatrics",
+      "Primary Triage"
+    ],
+    "contact": "+63 (82) 295-0288"
+  },
+  {
+    "id": "rhu-mintal",
+    "name": "Mintal Comprehensive Clinic",
+    "tier": "Primary",
+    "total_beds": 22,
+    "available_beds": 7,
+    "icu_available": 0,
+    "coordinates": {
+      "lat": 7.0872,
+      "lng": 125.5342
+    },
+    "specialties": [
+      "General Medicine",
+      "Primary Triage"
+    ],
+    "contact": "+63 (82) 293-0852"
   },
   {
     "id": "hosp-spmc",
     "name": "Southern Philippines Medical Center [SPMC]",
     "tier": "Tertiary",
     "total_beds": 1500,
-    "available_beds": 110,
+    "available_beds": 120,
     "icu_available": 4,
     "coordinates": {
       "lat": 7.0984,
       "lng": 125.6268
-    }
+    },
+    "specialties": [
+      "Trauma / Emergency",
+      "Infectious Disease",
+      "General Medicine",
+      "Pediatrics",
+      "Intensive Care (ICU)",
+      "Cardiology & Surgery"
+    ],
+    "contact": "+63 (82) 227-2731"
   },
   {
     "id": "hosp-ddh",
     "name": "Davao Doctors Hospital",
     "tier": "Tertiary",
     "total_beds": 250,
-    "available_beds": 32,
+    "available_beds": 55,
     "icu_available": 6,
     "coordinates": {
       "lat": 7.0682,
       "lng": 125.6033
-    }
+    },
+    "specialties": [
+      "Cardiology & Surgery",
+      "General Medicine",
+      "Intensive Care (ICU)",
+      "Trauma / Emergency"
+    ],
+    "contact": "+63 (82) 222-8000"
   },
   {
     "id": "hosp-mdmrc",
-    "name": "Metro Davao Medical & Research Center",
+    "name": "Metro Davao Medical and Research Center",
     "tier": "Tertiary",
     "total_beds": 200,
-    "available_beds": 16,
-    "icu_available": 0,
+    "available_beds": 70,
+    "icu_available": 9,
     "coordinates": {
       "lat": 7.1086,
       "lng": 125.6412
-    }
+    },
+    "specialties": [
+      "Intensive Care (ICU)",
+      "General Medicine",
+      "Trauma / Emergency",
+      "Cardiology & Surgery",
+      "Pediatrics"
+    ],
+    "contact": "+63 (82) 287-7777"
+  },
+  {
+    "id": "hosp-sph",
+    "name": "San Pedro Hospital",
+    "tier": "Tertiary",
+    "total_beds": 290,
+    "available_beds": 58,
+    "icu_available": 5,
+    "coordinates": {
+      "lat": 7.0765,
+      "lng": 125.6120
+    },
+    "specialties": [
+      "Pediatrics",
+      "General Medicine",
+      "Infectious Disease",
+      "Intensive Care (ICU)"
+    ],
+    "contact": "+63 (82) 221-4950"
+  },
+  {
+    "id": "hosp-brokenshire",
+    "name": "Brokenshire Hospital",
+    "tier": "Tertiary",
+    "total_beds": 200,
+    "available_beds": 48,
+    "icu_available": 4,
+    "coordinates": {
+      "lat": 7.0850,
+      "lng": 125.5925
+    },
+    "specialties": [
+      "Trauma / Emergency",
+      "General Medicine",
+      "Pediatrics",
+      "Cardiology & Surgery"
+    ],
+    "contact": "+63 (82) 305-3525"
   }
 ]

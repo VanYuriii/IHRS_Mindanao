@@ -50,6 +50,7 @@ export async function getRecommendations(payload) {
         origin_facility_id: payload.origin_facility_id,
         patient_severity: payload.patient_severity,
         required_specialty: payload.required_specialty,
+        scenario_mode: payload.scenario_mode || null,
       }),
     });
     if (!response.ok) {

@@ -45,28 +45,61 @@ const SPECIALTY_OPTIONS = [
   'Pediatrics',
   'Infectious Disease',
   'Intensive Care (ICU)',
+  'Cardiology & Surgery',
 ];
 
 const FALLBACK_PRIMARY_FACILITIES = [
   {
     id: 'rhu-toril',
-    name: 'Toril District Health Center (RHU)',
+    name: 'Toril District Health Center',
+    tier: 'Primary',
+  },
+  {
+    id: 'rhu-bunawan',
+    name: 'Bunawan District Health Center',
     tier: 'Primary',
   },
   {
     id: 'rhu-calinan',
-    name: 'Calinan Rural Health Unit',
+    name: 'Calinan District Health Center',
+    tier: 'Primary',
+  },
+  {
+    id: 'rhu-mintal',
+    name: 'Mintal Comprehensive Clinic',
     tier: 'Primary',
   },
 ];
 
-export default function ReferralForm({ facilities = [], onSubmit, isLoading = false }) {
+export default function ReferralForm({
+  facilities = [],
+  onSubmit,
+  isLoading = false,
+  activePreset = null,
+}) {
   const formId = useId();
   const [localFacilities, setLocalFacilities] = useState(facilities);
   const [originFacilityId, setOriginFacilityId] = useState('rhu-toril');
   const [patientSeverity, setPatientSeverity] = useState('CRITICAL');
-  const [requiredSpecialty, setRequiredSpecialty] = useState('Intensive Care (ICU)');
+  const [requiredSpecialty, setRequiredSpecialty] = useState('Trauma / Emergency');
   const [notes, setNotes] = useState('');
+
+  useEffect(() => {
+    if (activePreset) {
+      if (activePreset.origin_facility_id) {
+        setOriginFacilityId(activePreset.origin_facility_id);
+      }
+      if (activePreset.patient_severity) {
+        setPatientSeverity(activePreset.patient_severity);
+      }
+      if (activePreset.required_specialty) {
+        setRequiredSpecialty(activePreset.required_specialty);
+      }
+      if (activePreset.notes !== undefined) {
+        setNotes(activePreset.notes);
+      }
+    }
+  }, [activePreset]);
 
   useEffect(() => {
     if (facilities && facilities.length > 0) {
